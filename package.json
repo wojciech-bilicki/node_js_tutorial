@@ -1,0 +1,32 @@
+{
+  "name": "node_js_tutorial",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "babel-node": "babel-node",
+    "server": "nodemon --exec npm run babel-node -- ./src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run-callbacks": "babel-node ./examples/callbacks_promises_async.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wojciech-bilicki/node_js_tutorial.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wojciech-bilicki/node_js_tutorial/issues"
+  },
+  "homepage": "https://github.com/wojciech-bilicki/node_js_tutorial#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "pug": "^2.0.0-rc.4",
+    "request": "^2.83.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "nodemon": "^1.14.12"
+  }
+}
