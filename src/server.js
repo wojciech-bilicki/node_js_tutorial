@@ -1,34 +1,33 @@
 import express from 'express';
-
+import { Schema } from 'mongoose';
+import mongoose from './db_config';
 const app = express();
-app.set('view engine', 'pug');
-app.set('views', __dirname + '/views');
 
-const users = [
-  {
-    name: 'Wojtek'
+const betsSchema = new Schema({
+  teams: {
+    type: [String],
+    validate: {
+      validator: teams => teams && teams.length == 2,
+      message: 'There has to be 2 teams'
+    }
   },
-  {
-    name: 'Carrie'
+  result: {
+    type: String,
+    minlength: 3,
+    required: true
   }
-];
-
-app.get('/', (req, res) => {
-  res.render('index', {
-    title: 'Hello',
-    bet: 'Juventus vs Roma',
-    users: users,
-    renderBetterFooter: false
-  });
 });
 
-app.get('/about', (req, res) => {
-  res.render('about', { renderBetterFooter: true });
+const Bet = mongoose.model('Bet', betsSchema);
+
+const bet1 = new Bet({
+  result: '3 - 0'
 });
 
-app.get('/users', (req, res) => {
-  res.send(users);
-});
+bet1
+  .save()
+  .then(res => console.log(res))
+  .catch(err => console.log(err));
 
 app.listen(4000, () => {
   console.log('listening on a port 4000');
