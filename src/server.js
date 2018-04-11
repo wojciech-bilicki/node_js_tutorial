@@ -1,33 +1,22 @@
 import express from 'express';
-import { Schema } from 'mongoose';
-import mongoose from './db_config';
+import bodyParser from 'body-parser';
+
+import morgan from 'morgan';
+import { timelog } from './middlewares';
+import userRoutes from './User';
+import betRoutes from './Bet';
+
 const app = express();
+app.use(timelog);
 
-const betsSchema = new Schema({
-  teams: {
-    type: [String],
-    validate: {
-      validator: teams => teams && teams.length == 2,
-      message: 'There has to be 2 teams'
-    }
-  },
-  result: {
-    type: String,
-    minlength: 3,
-    required: true
-  }
-});
+app.use(bodyParser.json());
 
-const Bet = mongoose.model('Bet', betsSchema);
+if (process.env.NODE_ENV == 'development') {
+  app.use(morgan('dev'));
+}
 
-const bet1 = new Bet({
-  result: '3 - 0'
-});
-
-bet1
-  .save()
-  .then(res => console.log(res))
-  .catch(err => console.log(err));
+app.use('/users', userRoutes);
+app.use('/bets', betRoutes);
 
 app.listen(4000, () => {
   console.log('listening on a port 4000');

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "babel-node": "babel-node",
-    "server": "nodemon --exec npm run babel-node -- ./src/server.js",
+    "server": "nodemon --exec NODE_ENV=development npm run babel-node -- ./src/server.js",
+    "server:production": "nodemon --exec NODE_ENV=production npm run babel-node -- ./src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "run-callbacks": "babel-node ./examples/callbacks_promises_async.js"
   },
@@ -20,15 +21,21 @@
   },
   "homepage": "https://github.com/wojciech-bilicki/node_js_tutorial#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.2",
+    "crypto-js": "^3.1.9-1",
     "express": "^4.16.2",
+    "jsonwebtoken": "^8.2.0",
     "mongodb": "^3.0.2",
     "mongoose": "^5.0.6",
     "pug": "^2.0.0-rc.4",
-    "request": "^2.83.0"
+    "request": "^2.83.0",
+    "validator": "^9.4.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "morgan": "^1.9.0",
     "nodemon": "^1.14.12"
   }
 }
