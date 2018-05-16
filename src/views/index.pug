@@ -1,0 +1,10 @@
+html
+  head
+    title= title
+  body
+    h1= bet
+    header= goals
+    ul
+      each user in users
+        li= `Hi, I am ${user.name}`
+    include ../includes/footer.pug
